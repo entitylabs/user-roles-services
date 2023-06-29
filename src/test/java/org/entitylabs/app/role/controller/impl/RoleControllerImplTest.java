@@ -13,19 +13,16 @@ import org.entitylabs.app.role.service.RoleService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @DisplayName("Role controller test")
-@ExtendWith(SpringExtension.class)
 @WebFluxTest(controllers = RoleControllerImpl.class, excludeAutoConfiguration = ReactiveSecurityAutoConfiguration.class)
 class RoleControllerImplTest {
 
@@ -80,7 +77,7 @@ class RoleControllerImplTest {
 	}
 
 	@Test
-	@DisplayName("Fetch role by id success")
+	@DisplayName("Fetch role by id failure")
 	void test_fetch_role_by_id_failure() {
 		
 		when(roleService.fetchRoleById(inputRoleDTO.getId())).thenThrow(RoleNotFoundException.class);
