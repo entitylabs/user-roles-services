@@ -18,21 +18,6 @@ public class DomainMapper {
 	 * 
 	 * @param role
 	 * @param isAvailable
-	 * @param modifiedOn
-	 * @param createdOn
-	 * @return
-	 */
-//	public Role roleToDomain(final RoleDTO role, final boolean isAvailable, final ZonedDateTime modifiedOn,
-//			final ZonedDateTime createdOn) {
-//
-//		return Role.builder().available(isAvailable).modifiedOn(modifiedOn).createdOn(createdOn)
-//				.description(role.getDescription()).name(role.getName()).code(role.getCode()).build();
-//	}
-
-	/**
-	 * 
-	 * @param role
-	 * @param isAvailable
 	 * @return
 	 */
 	public Role roleToDomain(final RoleDTO role, final boolean isAvailable) {

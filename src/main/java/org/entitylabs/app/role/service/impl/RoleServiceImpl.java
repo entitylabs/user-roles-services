@@ -87,6 +87,7 @@ public class RoleServiceImpl implements RoleService {
 	private Role updateRoleData(Role savedRole, RoleDTO receivedRole) {
 
 		if (StringUtils.hasText(receivedRole.getDescription())) {
+			
 			savedRole.setDescription(receivedRole.getDescription());
 		}
 
