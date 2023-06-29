@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"org.entitylabs.app.role.controller","l":"RoleController"}];updateSearchResults();

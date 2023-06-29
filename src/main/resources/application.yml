@@ -1,0 +1,26 @@
+---
+springdoc:
+  api-docs:
+    path: /apidocs-ui.html
+    groups:
+      enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+
+
+logging:
+  file:
+    name: /Users/sanyam/Documents/service-logs/app-roles-services.log
+spring:
+  application:
+    name: app-roles-services
+  data:
+    mongodb:
+      uri: mongodb://192.168.129.8:27017/roles?authSource=admin
+      
+      
+server:
+  port: 8081
+  
+openapi:
+  url: http://localhost:8081 
