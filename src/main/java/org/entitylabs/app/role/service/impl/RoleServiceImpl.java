@@ -44,7 +44,7 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public Mono<RoleDTO> addRole(RoleDTO role) {
+	public Mono<Void> addRole(RoleDTO role) {
 
 		return this.roleRepository.findByCode(role.getCode())
 				.flatMap(foundRole -> Mono.error(new RoleAlreadyExistsException(
@@ -52,18 +52,20 @@ public class RoleServiceImpl implements RoleService {
 				.switchIfEmpty(Mono.defer(() -> Mono.just(role))).log()
 				.flatMap(roleDTO -> Mono.just(domainMapper.roleToDomain(role, true)))
 				.flatMap(roleUpdated -> this.roleRepository.save(roleUpdated))
-				.map(roleUpdated -> domainMapper.roleDomainToDTO(roleUpdated));
+				.then();
 
 	}
 
 	@Override
-	public Mono<RoleDTO> deleteRole(String id) {
+	public Mono<Void> deleteRole(String id) {
 
-		return this.roleRepository.findById(id).map(role -> role.toBuilder().available(false).build())
-				.flatMap(role -> this.roleRepository.save(role))
-				.map(role -> domainMapper.roleDomainToDTO(role))
+		return this.roleRepository.findById(id)
 				.switchIfEmpty(
-						Mono.error(new RoleNotFoundException(String.format(ErrorMessage.ROLE_WITH_ID_NOT_FOUND, id))));
+						Mono.error(new RoleNotFoundException(String.format(ErrorMessage.ROLE_WITH_ID_NOT_FOUND, id))))
+				.map(role -> role.toBuilder().available(false).build())
+				.flatMap(role -> this.roleRepository.save(role))
+				.log()
+				.then();
 	}
 
 	@Override

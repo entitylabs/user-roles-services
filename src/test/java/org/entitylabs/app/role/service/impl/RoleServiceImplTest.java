@@ -66,7 +66,9 @@ class RoleServiceImplTest {
 						.id(roles.get(1).getId()).name("User").build());
 
 		inputRoleDTO = RoleDTO.builder().available(true).code("SU").createdOn(ZonedDateTime.now())
-				.description("Super User").name("SuperUser").build();
+				.description("Super User").name("SuperUser")
+				.id(UUID.randomUUID().toString())
+				.build();
 
 		toBeSavedRole = Role.builder().available(true).code("SU").createdOn(ZonedDateTime.now())
 				.description("Super User").name("SuperUser").build();
@@ -107,7 +109,6 @@ class RoleServiceImplTest {
 		when(domainMapper.roleDomainToDTO(savedRole)).thenReturn(outputRoleDTO);
 		
 		StepVerifier.create(roleServiceImpl.addRole(inputRoleDTO))
-		.expectNextMatches(role-> role.getId().equals(savedRole.getId()))
 		.verifyComplete();
 		
 	}
@@ -136,10 +137,8 @@ class RoleServiceImplTest {
 		
 		when(this.roleRepository.save(any())).thenReturn(Mono.just(savedRole));
 		
-		when(domainMapper.roleDomainToDTO(savedRole)).thenReturn(outputRoleDTO);
-		
 		StepVerifier.create(roleServiceImpl.deleteRole(inputRoleDTO.getId()))
-		.expectNextMatches(role-> role.getId().equals(savedRole.getId()))
+		.expectNextCount(0)
 		.verifyComplete();
 		
 	}

@@ -41,6 +41,7 @@ class RoleControllerImplTest {
 	@BeforeEach
 	public void createData() {
 
+		
 		roleDTOs = List.of(
 				RoleDTO.builder().available(true).code("ADMIN").createdOn(ZonedDateTime.now()).description("Admin role")
 						.id(UUID.randomUUID().toString()).name("Administrator").build(),

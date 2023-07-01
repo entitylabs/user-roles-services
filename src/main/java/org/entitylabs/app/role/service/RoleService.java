@@ -13,9 +13,9 @@ public interface RoleService {
 
 	Flux<RoleDTO>  fetchAllRoles();
 
-	Mono<RoleDTO>  addRole(final RoleDTO role);
+	Mono<Void>  addRole(final RoleDTO role);
 
-	Mono<RoleDTO> deleteRole(final String id);
+	Mono<Void> deleteRole(final String id);
 
 	Mono<RoleDTO> updateRole(final RoleDTO role);
 }

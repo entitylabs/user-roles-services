@@ -42,18 +42,18 @@ public interface RoleController {
 	 * 
 	 * @param role
 	 */
-	Mono<RoleDTO> addRole(@Parameter(description = "Role object") @NotNull @Valid final RoleDTO role);
+	Mono<Void> addRole(@Parameter(description = "Role object") @NotNull @Valid final RoleDTO role);
 
 	/**
 	 * 
 	 * @param id
 	 */
-	Mono<RoleDTO> deleteRole(@Parameter(description = "Role id") @NotEmpty final String id);
+	Mono<Void> deleteRole(@Parameter(description = "Role id") @NotEmpty final String id);
 
 	/**
 	 * 
 	 * @param role
 	 */
-	Mono<RoleDTO> updateRome(@Parameter(description = "Role object") @Valid @NotNull final RoleDTO role,
+	Mono<RoleDTO> updateRole(@Parameter(description = "Role object") @Valid @NotNull final RoleDTO role,
 			@Parameter(description = "Role id") @NotEmpty final String id);
 }

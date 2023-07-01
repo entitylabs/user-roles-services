@@ -3,6 +3,7 @@ package org.entitylabs.app.role.controller.impl;
 import org.entitylabs.app.role.controller.RoleController;
 import org.entitylabs.app.role.dto.RoleDTO;
 import org.entitylabs.app.role.service.RoleService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
@@ -45,8 +47,9 @@ public class RoleControllerImpl implements RoleController {
 	}
 
 	@PostMapping
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	@Override
-	public Mono<RoleDTO> addRole(@RequestBody final RoleDTO role) {
+	public Mono<Void> addRole(@RequestBody final RoleDTO role) {
 
 		System.out.println(role);
 
@@ -56,8 +59,9 @@ public class RoleControllerImpl implements RoleController {
 	}
 
 	@DeleteMapping(path = "/{id}")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	@Override
-	public Mono<RoleDTO> deleteRole(@PathVariable final String id) {
+	public Mono<Void> deleteRole(@PathVariable final String id) {
 
 		log.info("RoleControllerImpl.deleteRole.called");
 
@@ -65,8 +69,9 @@ public class RoleControllerImpl implements RoleController {
 	}
 
 	@PatchMapping(path = "/{id}")
+	@ResponseStatus(code = HttpStatus.OK)
 	@Override
-	public Mono<RoleDTO> updateRome(@RequestBody final RoleDTO role, @PathVariable final String id) {
+	public Mono<RoleDTO> updateRole(@RequestBody final RoleDTO role, @PathVariable final String id) {
 
 		log.info("RoleControllerImpl.updateRome.called");
 
