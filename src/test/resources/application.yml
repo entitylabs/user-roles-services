@@ -1,0 +1,23 @@
+---
+logging:
+  file:
+    name: /Users/sanyam/Documents/service-logs/app-roles-services.log
+spring:
+  application:
+    name: user-roles-services
+  cloud:
+    config:
+      enabled: false
+de:
+  flapdoodle:
+    mongodb:
+      embedded:
+        version: 4.0.2
+    
+      
+      
+server:
+  port: 8081
+  
+openapi:
+  url: http://localhost:8081 

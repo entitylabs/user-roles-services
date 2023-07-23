@@ -15,6 +15,7 @@ import org.reactivestreams.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.TestPropertySource;
 
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
@@ -22,6 +23,7 @@ import reactor.test.StepVerifier;
 @DisplayName("Role repository tests")
 @DataMongoTest
 @Import(DatabaseConfiguration.class)
+@TestPropertySource(locations="file:/Users/sanyam/Documents/workspace/user-roles-services/src/test/resources/application.yml")
 class RoleRepositoryTest {
 
 	@Autowired

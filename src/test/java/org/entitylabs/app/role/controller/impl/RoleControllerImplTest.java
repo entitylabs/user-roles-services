@@ -17,12 +17,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @DisplayName("Role controller test")
+@TestPropertySource(locations="file:/Users/sanyam/Documents/workspace/user-roles-services/src/test/resources/application.yml")
 @WebFluxTest(controllers = RoleControllerImpl.class, excludeAutoConfiguration = ReactiveSecurityAutoConfiguration.class)
 class RoleControllerImplTest {
 
@@ -32,8 +34,6 @@ class RoleControllerImplTest {
 	private List<RoleDTO> roleDTOs;
 
 	private RoleDTO inputRoleDTO;
-
-	private RoleDTO outputRoleDTO;
 
 	@MockBean
 	RoleService roleService;
@@ -51,8 +51,6 @@ class RoleControllerImplTest {
 		inputRoleDTO = RoleDTO.builder().available(true).code("SU").createdOn(ZonedDateTime.now())
 				.id(UUID.randomUUID().toString()).description("Super User").name("SuperUser").build();
 
-		outputRoleDTO = RoleDTO.builder().available(true).code("SU").createdOn(ZonedDateTime.now())
-				.id(UUID.randomUUID().toString()).description("Super User").name("SuperUser").build();
 	}
 
 	@Test

@@ -16,6 +16,7 @@ public class UserRolesServicesApplication {
 		log.info("UserRolesServicesApplication.main started");
 		
 		SpringApplication.run(UserRolesServicesApplication.class, args);
+		
 	}
 
 }
