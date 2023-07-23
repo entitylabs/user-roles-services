@@ -190,7 +190,7 @@ class RoleServiceImplTest {
 		
 		when(domainMapper.roleDomainToDTO(savedRole)).thenReturn(outputRoleDTO);
 		
-		StepVerifier.create(roleServiceImpl.updateRole(inputRoleDTO))
+		StepVerifier.create(roleServiceImpl.updateRole(inputRoleDTO,inputRoleDTO.getId()))
 		.expectNextMatches(role-> role.getId().equals(savedRole.getId()))
 		.verifyComplete();
 		
@@ -202,7 +202,7 @@ class RoleServiceImplTest {
 
 		when(this.roleRepository.findById(inputRoleDTO.getId())).thenReturn(Mono.empty());
 		
-		StepVerifier.create(roleServiceImpl.updateRole(inputRoleDTO))
+		StepVerifier.create(roleServiceImpl.updateRole(inputRoleDTO,inputRoleDTO.getId()))
 		.expectError(RoleNotFoundException.class);
 		
 	}
