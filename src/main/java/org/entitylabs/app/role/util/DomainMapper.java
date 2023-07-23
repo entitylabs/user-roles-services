@@ -1,7 +1,5 @@
 package org.entitylabs.app.role.util;
 
-import java.time.ZonedDateTime;
-
 import org.entitylabs.app.role.domain.Role;
 import org.entitylabs.app.role.dto.RoleDTO;
 import org.springframework.stereotype.Component;
@@ -22,9 +20,8 @@ public class DomainMapper {
 	 */
 	public Role roleToDomain(final RoleDTO role, final boolean isAvailable) {
 
-		var timeNow = ZonedDateTime.now();
-		return Role.builder().available(isAvailable).modifiedOn(timeNow).createdOn(timeNow)
-				.description(role.getDescription()).name(role.getName()).code(role.getCode()).build();
+		return Role.builder().available(isAvailable).description(role.getDescription()).name(role.getName())
+				.code(role.getCode()).build();
 	}
 
 	/**
