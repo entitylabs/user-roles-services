@@ -75,7 +75,7 @@ public class RoleControllerImpl implements RoleController {
 
 		log.info("RoleControllerImpl.updateRome.called");
 
-		return this.roleService.updateRole(role);
+		return this.roleService.updateRole(role, id);
 	}
 
 	@GetMapping(value = "/role")

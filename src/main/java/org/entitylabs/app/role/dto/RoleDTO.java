@@ -15,20 +15,20 @@ import lombok.Data;
 @Builder
 public class RoleDTO {
 
-	private String id;
+	private final String id;
 	
 	@NotEmpty
-	private String code;
+	private final String code;
 	
-	private String name;
+	private final String name;
 	
 	@NotEmpty
-	private String description;
+	private final String description;
 	
-	private Boolean available;
+	private final Boolean available;
 	
-	private ZonedDateTime createdOn;
+	private final ZonedDateTime createdOn;
 	
-	private ZonedDateTime modifiedOn;
+	private final ZonedDateTime modifiedOn;
 	
 }

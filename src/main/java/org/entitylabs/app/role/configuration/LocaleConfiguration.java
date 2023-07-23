@@ -2,7 +2,7 @@ package org.entitylabs.app.role.configuration;
 
 import java.util.TimeZone;
 
-import org.entitylabs.app.role.constant.AppConstant;
+import org.entitylabs.app.commons.AppConstant;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;

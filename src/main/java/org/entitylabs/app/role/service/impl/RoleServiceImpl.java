@@ -28,17 +28,15 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public Mono<RoleDTO> fetchRoleById(String id) {
 
-		return roleRepository.findById(id)
-				.filter(role-> role.isAvailable())
+		return roleRepository.findById(id).filter(role -> role.isAvailable())
 				.map(role -> domainMapper.roleDomainToDTO(role)).switchIfEmpty(
-				Mono.error(new RoleNotFoundException(String.format(ErrorMessage.ROLE_WITH_ID_NOT_FOUND, id))));
+						Mono.error(new RoleNotFoundException(String.format(ErrorMessage.ROLE_WITH_ID_NOT_FOUND, id))));
 	}
 
 	@Override
 	public Flux<RoleDTO> fetchAllRoles() {
 
-		return roleRepository.findAll()
-				.filter(role-> role.isAvailable())
+		return roleRepository.findAll().filter(role -> role.isAvailable())
 				.map(role -> domainMapper.roleDomainToDTO(role));
 
 	}
@@ -51,8 +49,7 @@ public class RoleServiceImpl implements RoleService {
 						String.format(ErrorMessage.ROLE_WITH_CODE_ALREADY_EXISTS, role.getCode()))))
 				.switchIfEmpty(Mono.defer(() -> Mono.just(role))).log()
 				.flatMap(roleDTO -> Mono.just(domainMapper.roleToDomain(role, true)))
-				.flatMap(roleUpdated -> this.roleRepository.save(roleUpdated))
-				.then();
+				.flatMap(roleUpdated -> this.roleRepository.save(roleUpdated)).then();
 
 	}
 
@@ -62,16 +59,14 @@ public class RoleServiceImpl implements RoleService {
 		return this.roleRepository.findById(id)
 				.switchIfEmpty(
 						Mono.error(new RoleNotFoundException(String.format(ErrorMessage.ROLE_WITH_ID_NOT_FOUND, id))))
-				.map(role -> role.toBuilder().available(false).build())
-				.flatMap(role -> this.roleRepository.save(role))
-				.log()
-				.then();
+				.map(role -> role.toBuilder().available(false).build()).flatMap(role -> this.roleRepository.save(role))
+				.log().then();
 	}
 
 	@Override
-	public Mono<RoleDTO> updateRole(RoleDTO role) {
+	public Mono<RoleDTO> updateRole(RoleDTO role, final String id) {
 
-		return this.roleRepository.findById(role.getId()).map(savedRole -> updateRoleData(savedRole, role))
+		return this.roleRepository.findById(id).map(savedRole -> updateRoleData(savedRole, role))
 				.flatMap(savedRole -> this.roleRepository.save(savedRole))
 				.map(roleUpdated -> domainMapper.roleDomainToDTO(roleUpdated)).switchIfEmpty(Mono.error(
 						new RoleNotFoundException(String.format(ErrorMessage.ROLE_WITH_ID_NOT_FOUND, role.getId()))));
@@ -81,7 +76,7 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public Mono<RoleDTO> fetchRoleByCode(String code) {
 
-		return this.roleRepository.findByCode(code).filter(role-> role.isAvailable())
+		return this.roleRepository.findByCode(code).filter(role -> role.isAvailable())
 				.map(roleUpdated -> domainMapper.roleDomainToDTO(roleUpdated)).switchIfEmpty(Mono
 						.error(new RoleNotFoundException(String.format(ErrorMessage.ROLE_WITH_CODE_NOT_FOUND, code))));
 	}
@@ -89,7 +84,7 @@ public class RoleServiceImpl implements RoleService {
 	private Role updateRoleData(Role savedRole, RoleDTO receivedRole) {
 
 		if (StringUtils.hasText(receivedRole.getDescription())) {
-			
+
 			savedRole.setDescription(receivedRole.getDescription());
 		}
 

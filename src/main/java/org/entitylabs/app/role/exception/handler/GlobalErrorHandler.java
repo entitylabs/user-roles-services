@@ -1,4 +1,4 @@
-package org.entitylabs.app.role.exception.controller;
+package org.entitylabs.app.role.exception.handler;
 
 import org.entitylabs.app.role.exception.RoleAlreadyExistsException;
 import org.entitylabs.app.role.exception.RoleNotFoundException;
